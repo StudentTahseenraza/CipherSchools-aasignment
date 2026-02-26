@@ -1,0 +1,354 @@
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+
+.profile-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: $spacing-sm;
+  
+  @include respond-to('tablet') {
+    padding: $spacing-md;
+  }
+  
+  @include respond-to('desktop') {
+    padding: $spacing-lg;
+  }
+}
+
+.profile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-lg;
+  margin-bottom: $spacing-xl;
+  padding: $spacing-lg;
+  background: $white;
+  border-radius: $border-radius-xl;
+  box-shadow: $shadow-md;
+  
+  @include respond-to('tablet') {
+    flex-direction: row;
+    padding: $spacing-xl;
+  }
+  
+  .profile-avatar {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, $primary-color, $primary-dark);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: $shadow-lg;
+    
+    @include respond-to('tablet') {
+      width: 120px;
+      height: 120px;
+    }
+    
+    svg {
+      font-size: 3rem;
+      color: $white;
+      
+      @include respond-to('tablet') {
+        font-size: 4rem;
+      }
+    }
+  }
+  
+  .profile-info {
+    text-align: center;
+    
+    @include respond-to('tablet') {
+      text-align: left;
+      flex: 1;
+    }
+    
+    h1 {
+      font-size: $font-size-xl;
+      color: $gray-900;
+      margin-bottom: $spacing-xs;
+      
+      @include respond-to('tablet') {
+        font-size: $font-size-2xl;
+      }
+    }
+    
+    .profile-email,
+    .profile-joined {
+      display: inline-flex;
+      align-items: center;
+      gap: $spacing-xs;
+      color: $gray-600;
+      font-size: $font-size-sm;
+      margin-right: $spacing-md;
+      margin-bottom: $spacing-xs;
+      
+      svg {
+        color: $primary-color;
+        font-size: $font-size-md;
+      }
+    }
+  }
+}
+
+.profile-stats {
+  margin-bottom: $spacing-xl;
+  
+  h2 {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    font-size: $font-size-lg;
+    color: $gray-800;
+    margin-bottom: $spacing-lg;
+    
+    @include respond-to('tablet') {
+      font-size: $font-size-xl;
+    }
+    
+    svg {
+      color: $primary-color;
+    }
+  }
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-sm;
+  
+  @include respond-to('tablet') {
+    grid-template-columns: repeat(4, 1fr);
+    gap: $spacing-md;
+  }
+  
+  .stat-card {
+    background: $white;
+    padding: $spacing-lg $spacing-md;
+    border-radius: $border-radius-lg;
+    box-shadow: $shadow-md;
+    text-align: center;
+    transition: transform $transition-fast;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: $shadow-lg;
+    }
+    
+    .stat-value {
+      font-size: $font-size-2xl;
+      font-weight: 700;
+      color: $primary-color;
+      line-height: 1.2;
+      margin-bottom: $spacing-xs;
+      
+      @include respond-to('tablet') {
+        font-size: $font-size-3xl;
+      }
+    }
+    
+    .stat-label {
+      font-size: $font-size-xs;
+      color: $gray-600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      
+      @include respond-to('tablet') {
+        font-size: $font-size-sm;
+      }
+    }
+  }
+}
+
+.profile-attempts {
+  background: $white;
+  border-radius: $border-radius-xl;
+  padding: $spacing-lg;
+  box-shadow: $shadow-md;
+  
+  @include respond-to('tablet') {
+    padding: $spacing-xl;
+  }
+  
+  h2 {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    font-size: $font-size-lg;
+    color: $gray-800;
+    margin-bottom: $spacing-lg;
+    
+    @include respond-to('tablet') {
+      font-size: $font-size-xl;
+    }
+    
+    svg {
+      color: $primary-color;
+    }
+  }
+}
+
+.attempts-list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.attempt-item {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  padding: $spacing-md;
+  background: $gray-50;
+  border-radius: $border-radius-lg;
+  cursor: pointer;
+  transition: all $transition-fast;
+  border-left: 4px solid transparent;
+  
+  @include respond-to('tablet') {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  &:hover {
+    background: $gray-100;
+    transform: translateX(4px);
+  }
+  
+  &.success {
+    border-left-color: $success-color;
+  }
+  
+  &.error {
+    border-left-color: $danger-color;
+  }
+  
+  .attempt-info {
+    flex: 1;
+    
+    h4 {
+      font-size: $font-size-md;
+      color: $gray-800;
+      margin-bottom: $spacing-xs;
+      
+      @include respond-to('tablet') {
+        font-size: $font-size-lg;
+      }
+    }
+    
+    .attempt-query {
+      font-size: $font-size-sm;
+      color: $gray-600;
+      font-family: $font-family-mono;
+      background: $white;
+      padding: $spacing-xs;
+      border-radius: $border-radius-sm;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 100%;
+      
+      @include respond-to('tablet') {
+        max-width: 500px;
+      }
+    }
+  }
+  
+  .attempt-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-md;
+    
+    @include respond-to('tablet') {
+      justify-content: flex-end;
+    }
+    
+    .attempt-status {
+      font-weight: 700;
+      font-size: $font-size-lg;
+      
+      &.success {
+        color: $success-color;
+      }
+      
+      &.error {
+        color: $danger-color;
+      }
+    }
+    
+    .attempt-time {
+      font-size: $font-size-xs;
+      color: $gray-500;
+      white-space: nowrap;
+      
+      @include respond-to('tablet') {
+        font-size: $font-size-sm;
+      }
+    }
+  }
+}
+
+.no-attempts {
+  text-align: center;
+  padding: $spacing-2xl $spacing-md;
+  color: $gray-500;
+  font-size: $font-size-md;
+  background: $gray-50;
+  border-radius: $border-radius-lg;
+  border: 2px dashed $gray-300;
+  
+  @include respond-to('tablet') {
+    padding: $spacing-3xl;
+    font-size: $font-size-lg;
+  }
+}
+
+// Loading state
+.profile-loading {
+  @include flex-column-center;
+  min-height: 400px;
+  width: 100%;
+  
+  .loader {
+    margin-bottom: $spacing-md;
+  }
+  
+  p {
+    color: $gray-600;
+    font-size: $font-size-md;
+  }
+}
+
+// Error state
+.profile-error {
+  @include flex-column-center;
+  min-height: 400px;
+  width: 100%;
+  padding: $spacing-xl;
+  text-align: center;
+  
+  .error-icon {
+    font-size: 3rem;
+    color: $danger-color;
+    margin-bottom: $spacing-md;
+  }
+  
+  h3 {
+    font-size: $font-size-xl;
+    color: $gray-800;
+    margin-bottom: $spacing-sm;
+  }
+  
+  p {
+    color: $gray-600;
+    margin-bottom: $spacing-lg;
+  }
+  
+  .btn {
+    min-width: 200px;
+  }
+}

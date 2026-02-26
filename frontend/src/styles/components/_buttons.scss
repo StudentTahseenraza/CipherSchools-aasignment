@@ -1,0 +1,91 @@
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+
+.btn {
+  @include button-base;
+  
+  &-primary {
+    background: $primary-color;
+    color: $white;
+    
+    &:hover:not(:disabled) {
+      background: $primary-dark;
+    }
+  }
+  
+  &-secondary {
+    background: $gray-200;
+    color: $gray-800;
+    
+    &:hover:not(:disabled) {
+      background: $gray-400;
+    }
+  }
+  
+  &-outline {
+    background: transparent;
+    border: 1px solid $primary-color;
+    color: $primary-color;
+    
+    &:hover:not(:disabled) {
+      background: $primary-color;
+      color: $white;
+    }
+  }
+  
+  &-icon {
+    padding: $spacing-sm;
+    border-radius: 50%;
+    
+    @include touch-target;
+  }
+  
+  &-block {
+    width: 100%;
+  }
+  
+  &-sm {
+    padding: $spacing-xs $spacing-sm;
+    font-size: $font-size-xs;
+  }
+  
+  &-lg {
+    padding: $spacing-md $spacing-lg;
+    font-size: $font-size-lg;
+  }
+  
+  &-loading {
+    position: relative;
+    pointer-events: none;
+    
+    .btn__text {
+      opacity: 0;
+    }
+    
+    .btn__spinner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: $white;
+      animation: spin 0.8s linear infinite;
+    }
+  }
+}
+
+.btn-group {
+  display: flex;
+  gap: $spacing-sm;
+  
+  @include respond-to('mobile') {
+    flex-direction: column;
+  }
+  
+  @include respond-to('tablet') {
+    flex-direction: row;
+  }
+}

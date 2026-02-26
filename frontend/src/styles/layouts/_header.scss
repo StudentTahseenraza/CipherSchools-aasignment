@@ -1,0 +1,161 @@
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+
+.header {
+  background: $white;
+  box-shadow: $shadow-sm;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: $z-index-sticky;
+  width: 100%;
+  
+  &__container {
+    @include flex-between;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: $spacing-sm $spacing-md;
+    height: 60px;
+    
+    @include respond-to('tablet') {
+      padding: $spacing-sm $spacing-lg;
+      height: 70px;
+    }
+    
+    @include respond-to('desktop') {
+      padding: $spacing-sm $spacing-xl;
+      height: 80px;
+    }
+  }
+  
+  &__logo {
+    @include flex-start;
+    gap: $spacing-xs;
+    font-weight: 600;
+    color: $gray-900;
+    flex-shrink: 0;
+    
+    &-icon {
+      font-size: 1.5rem;
+      color: $primary-color;
+      
+      @include respond-to('mobile') {
+        font-size: 1.2rem;
+      }
+    }
+    
+    &-text {
+      font-size: $font-size-md;
+      
+      @include respond-to('mobile') {
+        font-size: $font-size-sm;
+      }
+      
+      @include respond-to('tablet') {
+        font-size: $font-size-lg;
+      }
+    }
+  }
+  
+  &__nav {
+    @include flex-center;
+    gap: $spacing-lg;
+    
+    @include respond-up-to('tablet') {
+      position: fixed;
+      top: 60px;
+      left: 0;
+      right: 0;
+      background: $white;
+      flex-direction: column;
+      align-items: stretch;
+      padding: $spacing-md;
+      box-shadow: $shadow-lg;
+      transform: translateY(-150%);
+      transition: transform $transition-base;
+      z-index: $z-index-dropdown;
+      gap: $spacing-sm;
+      
+      &--open {
+        transform: translateY(0);
+      }
+    }
+  }
+  
+  &__nav-link {
+    color: $gray-600;
+    font-weight: 500;
+    padding: $spacing-xs 0;
+    white-space: nowrap;
+    
+    @include respond-up-to('tablet') {
+      padding: $spacing-md;
+      text-align: center;
+      border-bottom: 1px solid $gray-100;
+      
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+    
+    &:hover {
+      color: $primary-color;
+    }
+    
+    &.active {
+      color: $primary-color;
+      font-weight: 600;
+    }
+  }
+  
+  &__mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: $gray-700;
+    cursor: pointer;
+    @include touch-target;
+    
+    @include respond-up-to('tablet') {
+      display: block;
+    }
+  }
+  
+  &__user {
+    @include flex-center;
+    gap: $spacing-sm;
+    
+    @include respond-up-to('tablet') {
+      justify-content: center;
+      padding: $spacing-md;
+    }
+    
+    &-name {
+      color: $gray-700;
+      font-weight: 500;
+      
+      @include respond-up-to('tablet') {
+        font-size: $font-size-sm;
+      }
+    }
+  }
+  
+  &__logout-btn {
+    @include button-base;
+    padding: $spacing-xs;
+    color: $gray-600;
+    
+    &:hover {
+      color: $danger-color;
+    }
+  }
+  
+  &__login-btn {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+  }
+}

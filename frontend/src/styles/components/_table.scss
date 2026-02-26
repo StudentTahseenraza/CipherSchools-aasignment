@@ -1,0 +1,104 @@
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+
+.results-table {
+  &__container {
+    width: 100%;
+    overflow: hidden;
+    border-radius: $border-radius-lg;
+    border: 1px solid $gray-200;
+  }
+  
+  &__header {
+    @include flex-between;
+    padding: $spacing-sm $spacing-md;
+    background: $gray-50;
+    border-bottom: 1px solid $gray-200;
+  }
+  
+  &__row-count {
+    font-size: $font-size-sm;
+    color: $gray-600;
+  }
+  
+  &__wrapper {
+    overflow-x: auto;
+    @include custom-scrollbar;
+  }
+  
+  &__col-type {
+    display: inline-block;
+    margin-left: $spacing-xs;
+    padding: 2px $spacing-xs;
+    font-size: $font-size-xs;
+    color: $gray-500;
+    background: $gray-100;
+    border-radius: $border-radius-sm;
+  }
+  
+  &__null {
+    color: $gray-400;
+    font-style: italic;
+  }
+  
+  &__empty {
+    @include flex-column-center;
+    padding: $spacing-3xl;
+    color: $gray-400;
+    background: $white;
+    border-radius: $border-radius-lg;
+    border: 2px dashed $gray-200;
+    
+    &-icon {
+      font-size: 3rem;
+      margin-bottom: $spacing-md;
+    }
+    
+    p {
+      font-size: $font-size-md;
+    }
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: $font-size-sm;
+    
+    @include respond-to('tablet') {
+      font-size: $font-size-md;
+    }
+  }
+  
+  thead {
+    background: $gray-800;
+    
+    th {
+      padding: $spacing-md;
+      text-align: left;
+      color: $white;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+  }
+  
+  tbody {
+    tr {
+      &:nth-child(even) {
+        background: $gray-50;
+      }
+      
+      &:hover {
+        background: $gray-100;
+      }
+    }
+    
+    td {
+      padding: $spacing-md;
+      border-bottom: 1px solid $gray-200;
+      white-space: nowrap;
+      max-width: 300px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}

@@ -1,0 +1,222 @@
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+
+.assignment-list {
+  width: 100%;
+  padding: $spacing-sm;
+  
+  @include respond-to('tablet') {
+    padding: $spacing-md;
+  }
+  
+  @include respond-to('desktop') {
+    padding: $spacing-lg;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  &__header {
+    @include flex-between;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $spacing-md;
+    margin-bottom: $spacing-lg;
+    width: 100%;
+    
+    @include respond-to('tablet') {
+      flex-direction: row;
+      align-items: center;
+    }
+    
+    h1 {
+      font-size: $font-size-xl;
+      color: $gray-900;
+      margin: 0;
+      
+      @include respond-to('mobile') {
+        font-size: $font-size-lg;
+      }
+    }
+  }
+  
+  &__filters {
+    display: flex;
+    gap: $spacing-xs;
+    background: $white;
+    padding: $spacing-xs;
+    border-radius: $border-radius-lg;
+    box-shadow: $shadow-sm;
+    width: 100%;
+    
+    @include respond-to('tablet') {
+      width: auto;
+    }
+    
+    button {
+      flex: 1;
+      padding: $spacing-xs $spacing-sm;
+      border: none;
+      border-radius: $border-radius-md;
+      background: transparent;
+      color: $gray-600;
+      font-size: $font-size-xs;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all $transition-fast;
+      white-space: nowrap;
+      
+      @include respond-to('tablet') {
+        flex: none;
+        padding: $spacing-xs $spacing-md;
+      }
+      
+      &:hover {
+        background: $gray-100;
+        color: $primary-color;
+      }
+      
+      &.active {
+        background: $primary-color;
+        color: $white;
+      }
+    }
+  }
+  
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-sm;
+    width: 100%;
+    
+    @include respond-to('tablet') {
+      grid-template-columns: repeat(2, 1fr);
+      gap: $spacing-md;
+    }
+    
+    @include respond-to('desktop') {
+      grid-template-columns: repeat(3, 1fr);
+      gap: $spacing-lg;
+    }
+  }
+  
+  &__empty {
+    @include flex-column-center;
+    padding: $spacing-2xl $spacing-md;
+    background: $white;
+    border-radius: $border-radius-xl;
+    box-shadow: $shadow-sm;
+    text-align: center;
+    width: 100%;
+    grid-column: 1 / -1;
+    
+    .empty-icon {
+      font-size: 3rem;
+      color: $gray-300;
+      margin-bottom: $spacing-md;
+    }
+    
+    h3 {
+      font-size: $font-size-lg;
+      color: $gray-700;
+      margin-bottom: $spacing-sm;
+    }
+    
+    p {
+      color: $gray-500;
+      margin-bottom: $spacing-lg;
+      font-size: $font-size-sm;
+    }
+  }
+}
+
+.assignment-card {
+  background: $white;
+  border-radius: $border-radius-lg;
+  padding: $spacing-md;
+  box-shadow: $shadow-sm;
+  cursor: pointer;
+  transition: all $transition-base;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-lg;
+  }
+  
+  &__header {
+    @include flex-between;
+    margin-bottom: $spacing-sm;
+  }
+  
+  &__difficulty {
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $border-radius-sm;
+    font-size: $font-size-xs;
+    font-weight: 600;
+    
+    &-easy {
+      background: #e6f7e6;
+      color: #2e7d32;
+    }
+    
+    &-medium {
+      background: #fff3e0;
+      color: #f57c00;
+    }
+    
+    &-hard {
+      background: #ffebee;
+      color: #c62828;
+    }
+  }
+  
+  &__category {
+    font-size: $font-size-xs;
+    color: $gray-500;
+    background: $gray-100;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $border-radius-sm;
+  }
+  
+  &__title {
+    font-size: $font-size-md;
+    font-weight: 600;
+    color: $gray-900;
+    margin-bottom: $spacing-xs;
+    @include truncate-text;
+  }
+  
+  &__description {
+    color: $gray-600;
+    font-size: $font-size-sm;
+    margin-bottom: $spacing-md;
+    @include line-clamp(2);
+    min-height: 2.5rem;
+    flex: 1;
+  }
+  
+  &__footer {
+    @include flex-between;
+    font-size: $font-size-sm;
+    color: $gray-500;
+    margin-top: auto;
+    padding-top: $spacing-sm;
+    border-top: 1px solid $gray-100;
+  }
+  
+  &__attempts {
+    color: $primary-color;
+    font-weight: 500;
+  }
+  
+  &__arrow {
+    font-size: $font-size-lg;
+    transition: transform $transition-fast;
+    
+    &:hover {
+      transform: translateX(4px);
+    }
+  }
+}

@@ -1,0 +1,55 @@
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+
+.loader {
+  @include flex-column-center;
+  gap: $spacing-md;
+  
+  &--small {
+    .loader__spinner {
+      font-size: 1.5rem;
+    }
+    
+    .loader__text {
+      font-size: $font-size-sm;
+    }
+  }
+  
+  &--medium {
+    .loader__spinner {
+      font-size: 2.5rem;
+    }
+    
+    .loader__text {
+      font-size: $font-size-md;
+    }
+  }
+  
+  &--large {
+    .loader__spinner {
+      font-size: 3.5rem;
+    }
+    
+    .loader__text {
+      font-size: $font-size-lg;
+    }
+  }
+  
+  &__spinner {
+    color: $primary-color;
+    animation: spin 1s linear infinite;
+  }
+  
+  &__text {
+    color: $gray-600;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
