@@ -28,7 +28,18 @@ export const AuthProvider = ({ children }) => {
   const loadUser = async () => {
     try {
       const response = await api.get('/auth/me');
-      setUser(response.data.user);
+      console.log('User loaded:', response.data);
+      
+      if (response.data.success) {
+        setUser(response.data.user);
+        
+        // Update localStorage admin status
+        if (response.data.isAdmin || response.data.user?.isAdmin) {
+          localStorage.setItem('isAdmin', 'true');
+        } else {
+          localStorage.removeItem('isAdmin');
+        }
+      }
     } catch (error) {
       console.error('Failed to load user:', error);
       logout();
@@ -45,11 +56,39 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem('token', response.data.token);
         setToken(response.data.token);
         setUser(response.data.user);
+        
+        // Set admin status in localStorage
+        if (response.data.isAdmin || response.data.user?.isAdmin) {
+          localStorage.setItem('isAdmin', 'true');
+        } else {
+          localStorage.removeItem('isAdmin');
+        }
+        
         toast.success('Login successful!');
         return { success: true };
       }
     } catch (error) {
       const message = error.response?.data?.error || 'Login failed';
+      toast.error(message);
+      return { success: false, error: message };
+    }
+  };
+
+  const adminLogin = async (email, password) => {
+    try {
+      const response = await api.post('/auth/admin-login', { email, password });
+      
+      if (response.data.success) {
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('isAdmin', 'true');
+        setToken(response.data.token);
+        setUser(response.data.user);
+        
+        toast.success('Admin login successful!');
+        return { success: true };
+      }
+    } catch (error) {
+      const message = error.response?.data?.error || 'Admin login failed';
       toast.error(message);
       return { success: false, error: message };
     }
@@ -63,6 +102,7 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem('token', response.data.token);
         setToken(response.data.token);
         setUser(response.data.user);
+        localStorage.removeItem('isAdmin'); // Regular users are not admins
         toast.success('Registration successful!');
         return { success: true };
       }
@@ -75,6 +115,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('isAdmin');
     setToken(null);
     setUser(null);
     toast.success('Logged out successfully');
@@ -84,6 +125,7 @@ export const AuthProvider = ({ children }) => {
     user,
     loading,
     login,
+    adminLogin,
     register,
     logout,
     isAuthenticated: !!user

@@ -3,6 +3,10 @@
 
 .btn {
   @include button-base;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
   
   &-primary {
     background: $primary-color;
@@ -18,13 +22,13 @@
     color: $gray-800;
     
     &:hover:not(:disabled) {
-      background: $gray-400;
+      background: $gray-300;
     }
   }
   
   &-outline {
     background: transparent;
-    border: 1px solid $primary-color;
+    border: 2px solid $primary-color;
     color: $primary-color;
     
     &:hover:not(:disabled) {
@@ -33,11 +37,31 @@
     }
   }
   
-  &-icon {
-    padding: $spacing-sm;
-    border-radius: 50%;
+  &-danger {
+    background: $danger-color;
+    color: $white;
     
-    @include touch-target;
+    &:hover:not(:disabled) {
+      background: darken($danger-color, 10%);
+    }
+  }
+  
+  &-success {
+    background: $success-color;
+    color: $white;
+    
+    &:hover:not(:disabled) {
+      background: darken($success-color, 10%);
+    }
+  }
+  
+  &-warning {
+    background: $warning-color;
+    color: $white;
+    
+    &:hover:not(:disabled) {
+      background: darken($warning-color, 10%);
+    }
   }
   
   &-block {
@@ -50,30 +74,22 @@
   }
   
   &-lg {
-    padding: $spacing-md $spacing-lg;
+    padding: $spacing-md $spacing-xl;
     font-size: $font-size-lg;
   }
   
-  &-loading {
-    position: relative;
-    pointer-events: none;
+  &-icon {
+    padding: $spacing-xs;
+    border-radius: $border-radius-sm;
     
-    .btn__text {
-      opacity: 0;
+    svg {
+      font-size: 1.2rem;
     }
-    
-    .btn__spinner {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 20px;
-      height: 20px;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
-      border-top-color: $white;
-      animation: spin 0.8s linear infinite;
-    }
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 }
 
@@ -81,11 +97,41 @@
   display: flex;
   gap: $spacing-sm;
   
-  @include respond-to('mobile') {
+  @include respond-up-to('mobile') {
     flex-direction: column;
+    
+    .btn {
+      width: 100%;
+    }
+  }
+}
+
+// Loading spinner for buttons
+.btn-loading {
+  position: relative;
+  pointer-events: none;
+  
+  .btn-text {
+    opacity: 0;
   }
   
-  @include respond-to('tablet') {
-    flex-direction: row;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: $white;
+    border-radius: 50%;
+    animation: button-spin 0.8s linear infinite;
+  }
+}
+
+@keyframes button-spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
   }
 }

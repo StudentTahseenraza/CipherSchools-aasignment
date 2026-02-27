@@ -14,6 +14,8 @@ import hintRoutes from './routes/hint.routes.js';
 import authRoutes from './routes/auth.routes.js';
 import userRoutes from './routes/user.routes.js';
 import analyticsRoutes from './routes/analytics.routes.js';
+import adminRoutes from './routes/admin.routes.js';
+
 
 import { errorHandler } from './middleware/errorHandler.js';
 
@@ -58,6 +60,8 @@ app.use('/api/hint', hintRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/analytics', analyticsRoutes);
+app.use('/api/admin', adminRoutes);
+
 
 // Health check
 app.get('/health', (req, res) => {
