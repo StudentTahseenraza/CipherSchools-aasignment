@@ -548,7 +548,7 @@ async function seedAllData() {
     } finally {
         await mongoose.disconnect();
         await pgPool.end();
-        process.exit(0);
+        // process.exit(0);
     }
 }
 
