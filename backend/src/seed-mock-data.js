@@ -552,5 +552,4 @@ async function seedAllData() {
     }
 }
 
-// Run seeding
-seedAllData();
+export default seedAllData;

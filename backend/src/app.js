@@ -17,6 +17,8 @@ import userRoutes from './routes/user.routes.js';
 import analyticsRoutes from './routes/analytics.routes.js';
 import adminRoutes from './routes/admin.routes.js';
 
+import seedAllData from './seed-mock-data.js';
+
 
 import { errorHandler } from './middleware/errorHandler.js';
 
@@ -61,6 +63,16 @@ const limiter = rateLimit({
     message: 'Too many requests from this IP, please try again later.'
 });
 app.use('/api/', limiter);
+
+app.get("/seed", async (req, res) => {
+  try {
+    await seedAllData();
+    res.json({ message: "Seed completed successfully" });
+  } catch (error) {
+    console.error("Seed error:", error);
+    res.status(500).json({ error: "Seeding failed" });
+  }
+});
 
 // Body parser
 app.use(express.json({ limit: '10mb' }));
