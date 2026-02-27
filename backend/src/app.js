@@ -3,6 +3,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
 import rateLimit from 'express-rate-limit';
+import mongoose from 'mongoose';
 
 import { connectMongoDB } from './config/mongodb.js';
 import { createPostgresPools } from './config/postgres.js';
